@@ -138,7 +138,6 @@ window.addEventListener('load', ensureSquare);
 window.addEventListener('resize', ensureSquare);
 
 /* ====== Load puzzle & board ====== */
-let lineStep = 0
 function loadPuzzle(index){
   if(!puzzles.length) return;
   currentPuzzleIndex = index;
@@ -148,8 +147,6 @@ function loadPuzzle(index){
   if(!ChessCtor){ alert('chess.js لم يتم تحميله.'); throw new Error('Chess ctor missing'); }
 
   game = new ChessCtor(fen);
-
- lineStep = 0
 
   const config = {
     draggable: true,
@@ -202,74 +199,30 @@ function promote(piece){
 }
 
 function handleMove(move){
-  const current = puzzles[currentPuzzleIndex];
-  const line = current.line;           // ممكن تكون undefined
-  const solution = current.solution;   // للباuzzles ذات نقلة واحدة
-
-  // صوت الحركة
-  if (move.captured) { captureSound.currentTime=0; captureSound.play(); }
+  if (move.captured){ captureSound.currentTime=0; captureSound.play(); }
   else { moveSound.currentTime=0; moveSound.play(); }
 
-  // لو عندنا line (تسلسل نقلات)
-  if (Array.isArray(line) && line.length){
-    // تأكد إن نقلة اللاعب تطابق العنصر الحالي في الخط
-    const expected = line[lineStep];
-    if (move.san !== expected){
-      wrongSound.currentTime=0; wrongSound.play();
-      game.undo(); board.position(game.fen(), true);
-      updateStatus();
-      return;
-    }
+  updateStatus();
 
-    // نقلة اللاعب صح
-    lineStep++;
-    updateStatus();
+  const current = puzzles[currentPuzzleIndex];
+  const solution = current?.solution || [];
 
-    // لو فيه ردّ للخصم في الخط: العبّه تلقائيًا
-    if (lineStep < line.length){
-      const replySAN = line[lineStep];        // نقلة الخصم
-      const reply = game.move(replySAN);      // chess.js يقبل SAN مباشرة
-      if (!reply){
-        console.warn('Reply SAN not legal:', replySAN);
-      }
-      board.position(game.fen(), true);
-      lineStep++;
-      updateStatus();
-    }
-
-    // خلصت كل الخطوات؟
-    if (lineStep >= line.length){
-      markAttempt(current.id, true);
-      successSound.currentTime=0; successSound.play();
-      setTimeout(()=>{
-        if (currentPuzzleIndex + 1 < puzzles.length) loadPuzzle(currentPuzzleIndex + 1);
-        else {
-          finishSound?.play?.();
-          alert('🎉 خلصت كل البازلز!');
-        }
-      }, 800);
-    }
-    return;
-  }
-
-  // الوضع القديم (نقلة واحدة صحيحة من أي عنصر داخل solution)
-  if (solution?.includes(move.san)) {
+  if (solution.includes(move.san)) {
     markAttempt(current.id, true);
     successSound.currentTime=0; successSound.play();
     setTimeout(()=>{
       if (currentPuzzleIndex + 1 < puzzles.length) loadPuzzle(currentPuzzleIndex + 1);
       else {
-        alldoneSound?.play?.();
-        alert('🎉 خلصت كل البازلز!');
-      }
+  alldoneSound.currentTime = 0;
+  alldoneSound.play();
+  alert("🎉 خلصت كل البازلز!");
+}
     }, 800);
-  } else if (solution && solution.length){
+  } else if (solution.length){
     markAttempt(current.id, false);
     wrongSound.currentTime=0; wrongSound.play();
     game.undo(); board.position(game.fen(), true);
   }
-
-  updateStatus();
 }
 
 function onSnapEnd(){ board.position(game.fen()); }
