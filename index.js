@@ -259,7 +259,7 @@ function handleMove(move){
     setTimeout(()=>{
       if (currentPuzzleIndex + 1 < puzzles.length) loadPuzzle(currentPuzzleIndex + 1);
       else {
-        finishSound?.play?.();
+        alldoneSound?.play?.();
         alert('🎉 خلصت كل البازلز!');
       }
     }, 800);
