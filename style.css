@@ -148,6 +148,7 @@ input[type="file"]{
       body {
       overflow: hidden;
       overflow-y: hidden;
+      overscroll-behavior: contain;
       
     }
 
