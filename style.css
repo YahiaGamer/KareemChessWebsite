@@ -12,7 +12,9 @@ body{
   text-align:center;
 }
 
-/* Board Card */
+#myBoard{
+ width: 600px;
+}
 
 
 /* Controls directly under board */
@@ -139,5 +141,19 @@ input[type="file"]{
   content:"";
   display:block;
   clear:both;
+}
+
+/* Mobile */
+@media only screen and (max-width: 600px) {
+      body {
+      overflow: hidden;
+      overflow-y: hidden;
+      
+    }
+
+#myBoard{
+ width: 500px;
+}
+
 }
 
