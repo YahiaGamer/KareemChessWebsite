@@ -1,0 +1,143 @@
+/* Layout */
+body{
+  margin:0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #0f2027, #1c1c1c, #1d1d1d);
+  color:#f0f0f0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  min-height:100vh;
+  padding:24px 16px;
+  text-align:center;
+}
+
+/* Board Card */
+
+
+/* Controls directly under board */
+.controls{
+  display:flex;
+  gap:12px;
+  margin:10px 0 16px 0;
+}
+button{
+  background:#1b1b1b;
+  border:none;
+  padding:8px 12px;
+  border-radius:6px;
+  color:#d8d8d8;
+  font-weight:700;
+  font-size:13px;
+  cursor:pointer;
+  transition:all .25s ease;
+}
+button:hover{
+  background:#00d4ff;
+  color:#000;
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(0,212,255,.35);
+}
+
+/* Info panel (below) */
+.info-panel{
+  max-width:700px;
+  width:100%;
+  background:#242437;
+  padding:14px;
+  border-radius:12px;
+  border:1px solid #00000022;
+  box-shadow:0 6px 20px rgba(0,0,0,.5);
+  margin-bottom:12px;
+}
+.info-item{
+  margin-bottom:10px;
+  padding:8px;
+  background:#30304a;
+  border-radius:8px;
+  font-size:13px;
+  word-wrap:break-word;
+}
+
+/* Upload */
+input[type="file"]{
+  margin-top:8px;
+  background:#333;
+  padding:6px;
+  border-radius:6px;
+  color:#f0f0f0;
+  font-size:13px;
+  border:1px solid #00000033;
+  width:100%;
+}
+
+/* Toolbar */
+.toolbar{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  justify-content:center;
+  margin:12px 0;
+  flex-wrap:wrap;
+}
+.toolbar input,
+.toolbar select{
+  padding:8px 10px;
+  border-radius:6px;
+  border:1px solid #444;
+  background:#2b2b2b;
+  color:#eee;
+}
+
+/* Promotion modal */
+#promotionDialog{
+  display:none;
+  position:fixed;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  background:#242437;
+  padding:20px;
+  border-radius:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,.7);
+  border:2px solid #15151555;
+  z-index:2000;
+}
+#promotionDialog p{margin:0 0 10px 0;font-weight:700;color:#00d4ff}
+#promotionDialog img{
+  width:65px; margin:8px; cursor:pointer;
+  transition:transform .2s, box-shadow .2s; border-radius:8px;
+}
+#promotionDialog img:hover{transform:scale(1.15); box-shadow:0 0 10px #00d4ff}
+
+/* Manager & Stats modal */
+.modal{display:none; position:fixed; inset:0; background:#0008; z-index:3000; align-items:center; justify-content:center;}
+.modal-card{width:min(920px,95vw); max-height:90vh; overflow:auto; background:#242437; padding:16px; border-radius:12px;}
+.modal-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;}
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;}
+.grid2 input{padding:8px; border-radius:8px; border:1px solid #555; background:#1e1e2a; color:#eee;}
+.row-actions{display:flex; gap:8px;}
+.manager-list .row{display:flex; gap:8px; align-items:center; background:#30304a; padding:8px; border-radius:8px; margin-bottom:8px;}
+.manager-list .row code{background:#1e1e2a; padding:2px 6px; border-radius:6px;}
+
+/* Chessboard.js core styles */
+.board-b72b1 { border:2px solid #404040; }
+.square-55d63 {
+  float:left;
+  width:12.5%;
+  height:12.5%;
+}
+.white-1e1d7 { background-color:#f0d9b5; }
+.black-3c85d { background-color:#b58863; }
+.piece-417db {
+  width:100%;
+  height:100%;
+  background-size:contain;
+  background-repeat:no-repeat;
+  background-position:center;
+}
+.clearfix-7da63::after {
+  content:"";
+  display:block;
+  clear:both;
+}
+

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chess Puzzle Trainer</title>
+
+  <!-- app styles -->
+   <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.css">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Board Card -->
+    <div id="myBoard" style="width: 600px;"></div>
+
+  
+
+  <!-- Controls UNDER the board -->
+  <div class="controls">
+    <button onclick="prevPuzzle()">⏮ Previous</button>
+    <button onclick="nextPuzzle()">Next ⏭</button>
+  </div>
+
+  <!-- Status / Upload -->
+  <div class="info-panel">
+    <div class="info-item"><b id="status">Load puzzles to start</b></div>
+    <div class="info-item"><b>FEN:</b> <span id="fen"></span></div>
+    <div class="info-item"><b>PGN:</b> <span id="pgn"></span></div>
+    <input type="file" id="uploadJson" accept=".json" />
+  </div>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <select id="playerSelect" title="Player"></select>
+    <input id="newPlayerName" placeholder="إضافة لاعب جديد" />
+    <button onclick="addPlayer()">➕ Add Player</button>
+    <button onclick="resetCurrentPlayerStats()">♻️ Reset Stats</button>
+
+    <button onclick="openManager()">✏️ إدارة البازلز</button>
+    <button onclick="openStats()">📊 الإحصائيات</button>
+    <button onclick="exportPuzzles()">⬇️ تصدير JSON</button>
+  </div>
+
+  <!-- Promotion Popup -->
+  <div id="promotionDialog">
+    <img id="promoQ" src="img/chesspieces/staunty/wQ.png" onclick="promote('q')" />
+    <img id="promoR" src="img/chesspieces/staunty/wR.png" onclick="promote('r')" />
+    <img id="promoB" src="img/chesspieces/staunty/wB.png" onclick="promote('b')" />
+    <img id="promoN" src="img/chesspieces/staunty/wN.png" onclick="promote('n')" />
+  </div>
+
+  <!-- Manager Modal -->
+  <div id="managerModal" class="modal">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3>إدارة البازلز</h3>
+        <button onclick="closeManager()">✖</button>
+      </div>
+
+      <div class="grid2">
+        <input id="m_fen" placeholder="FEN" />
+        <input id="m_solution" placeholder="الحل (SAN مفصول بفواصل: Qh7#,Qe4#)" />
+        <input id="m_id" placeholder="ID (اختياري للتعديل)" />
+        <div class="row-actions">
+          <button onclick="managerAdd()">➕ إضافة</button>
+          <button onclick="managerUpdate()">💾 حفظ تعديل</button>
+        </div>
+      </div>
+
+      <div id="managerList" class="manager-list"></div>
+    </div>
+  </div>
+
+  <!-- Stats Modal -->
+  <div id="statsModal" class="modal">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3>📊 إحصائيات اللاعب</h3>
+        <button onclick="closeStats()">✖</button>
+      </div>
+      <div id="statsContent"></div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- اختبر ده الأول -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
