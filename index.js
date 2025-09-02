@@ -9,6 +9,8 @@ let currentPuzzleIndex = 0;
 let game = null;
 let board = null;
 let promotionMove = null;
+let activeLines = [];   // الخطوط المحتملة (بعد التصفية)
+let lineStep    = 0;    // مؤشر الخطوة داخل الخط
 
 /* ====== Keys ====== */
 const PUZZLES_KEY = 'puzzlesV1';
@@ -148,6 +150,17 @@ function loadPuzzle(index){
 
   game = new ChessCtor(fen);
 
+  // بعد إنشاء البورد وتعيين الوضع:
+const current = puzzles[currentPuzzleIndex];
+if (Array.isArray(current.lines) && current.lines.length) {
+  // انسخ الخطوط (OR بين الخطوط)
+  activeLines = current.lines.map(line => line.slice());
+  lineStep = 0;
+} else {
+  activeLines = [];
+  lineStep = 0;
+}
+
   const config = {
     draggable: true,
     pieceTheme: 'img/chesspieces/staunty/{piece}.png',
@@ -199,30 +212,93 @@ function promote(piece){
 }
 
 function handleMove(move){
-  if (move.captured){ captureSound.currentTime=0; captureSound.play(); }
+  // أصوات الحركة/الأخذ
+  if (move.captured) { captureSound.currentTime=0; captureSound.play(); }
   else { moveSound.currentTime=0; moveSound.play(); }
 
-  updateStatus();
-
   const current = puzzles[currentPuzzleIndex];
-  const solution = current?.solution || [];
+  const hasLines = Array.isArray(current?.lines) && current.lines.length;
 
+  // ===== وضع "الخطوط" (نقلة عليه رد، وأكتر من خط ممكن) =====
+  if (hasLines) {
+    // صفّي الخطوط على اللي يتطابق مع النقلة الحالية في الموضع lineStep
+    const nextVariants = activeLines.filter(line => line[lineStep] === move.san);
+
+    if (!nextVariants.length) {
+      // نقلة غير صحيحة بالنسبة لكل الخطوط
+      wrongSound.currentTime=0; wrongSound.play();
+      game.undo();
+      board.position(game.fen(), true);
+      updateStatus();
+      return;
+    }
+
+    // نقلة اللاعب صحيحة → ثبّت الخطوط المحتملة
+    activeLines = nextVariants;
+    lineStep++; // تقدمنا خطوة
+
+    // لو أي خط انتهى بالظبط عند هذه النقلة → حل البازل
+    const solvedNow = activeLines.some(line => lineStep >= line.length);
+    if (solvedNow) {
+      markAttempt(current.id, true);
+      successSound.currentTime=0; successSound.play();
+      setTimeout(()=>{
+        if (currentPuzzleIndex + 1 < puzzles.length) loadPuzzle(currentPuzzleIndex + 1);
+        else { finishSound?.play?.(); alert('🎉 خلصت كل البازلز!'); }
+      }, 800);
+      return;
+    }
+
+    // ردّ الخصم التلقائي: العب النقلة التالية من أول خط (كل الخطوط الحالية متطابقة في هذه النقطة عادةً)
+    // ملاحظة: نفترض الترتيب Player, Opponent, Player ... بما إن الدور في الـ FEN هو دور اللاعب
+    const replySAN = activeLines[0][lineStep];
+    const reply = game.move(replySAN);
+    if (!reply) {
+      console.warn('Reply SAN not legal for this position:', replySAN);
+      // لو حصل تعارض، نرجّع خطوة ونعتبره خطأ
+      wrongSound.currentTime=0; wrongSound.play();
+      game.undo(); // Undo محاولة الرد الفاشلة (لو اتعملت)
+      game.undo(); // Undo نقلة اللاعب
+      board.position(game.fen(), true);
+      updateStatus();
+      return;
+    }
+    board.position(game.fen(), true);
+    lineStep++; // تقدّمنا بنقلة الخصم
+
+    // بعد الرد، لو أي خط خلّص → حل
+    const solvedAfterReply = activeLines.some(line => lineStep >= line.length);
+    if (solvedAfterReply) {
+      markAttempt(current.id, true);
+      successSound.currentTime=0; successSound.play();
+      setTimeout(()=>{
+        if (currentPuzzleIndex + 1 < puzzles.length) loadPuzzle(currentPuzzleIndex + 1);
+        else { finishSound?.play?.(); alert('🎉 خلصت كل البازلز!'); }
+      }, 800);
+      return;
+    }
+
+    updateStatus();
+    return;
+  }
+
+  // ===== الوضع القديم (نقلة واحدة، مع قبول أكتر من إجابة في solution) =====
+  const solution = current?.solution || [];
   if (solution.includes(move.san)) {
     markAttempt(current.id, true);
     successSound.currentTime=0; successSound.play();
     setTimeout(()=>{
       if (currentPuzzleIndex + 1 < puzzles.length) loadPuzzle(currentPuzzleIndex + 1);
-      else {
-  alldoneSound.currentTime = 0;
-  alldoneSound.play();
-  alert("🎉 خلصت كل البازلز!");
-}
+      else { finishSound?.play?.(); alert('🎉 خلصت كل البازلز!'); }
     }, 800);
   } else if (solution.length){
     markAttempt(current.id, false);
     wrongSound.currentTime=0; wrongSound.play();
-    game.undo(); board.position(game.fen(), true);
+    game.undo();
+    board.position(game.fen(), true);
   }
+
+  updateStatus();
 }
 
 function onSnapEnd(){ board.position(game.fen()); }
