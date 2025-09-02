@@ -279,7 +279,7 @@ function handleMove(move){
       successSound.currentTime=0; successSound.play();
       setTimeout(()=>{
         if (currentPuzzleIndex + 1 < puzzles.length) loadPuzzle(currentPuzzleIndex + 1);
-        else { finishSound?.play?.(); alert('🎉 خلصت كل البازلز!'); }
+        else { alldoneSound?.play?.(); alert('🎉 خلصت كل البازلز!'); }
       }, 800);
       return;
     }
