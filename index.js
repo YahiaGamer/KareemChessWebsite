@@ -12,6 +12,11 @@ let promotionMove = null;
 let activeLines = [];   // الخطوط المحتملة (بعد التصفية)
 let lineStep    = 0;    // مؤشر الخطوة داخل الخط
 
+function orientationFromFEN(fen){
+  try { return (fen.split(' ')[1] === 'b') ? 'black' : 'white'; }
+  catch { return 'white'; }
+}
+
 /* ====== Keys ====== */
 const PUZZLES_KEY = 'puzzlesV1';
 const STATS_KEY   = 'statsV1';
@@ -161,13 +166,14 @@ if (Array.isArray(current.lines) && current.lines.length) {
   lineStep = 0;
 }
 
-  const config = {
+  var config = {
     draggable: true,
     pieceTheme: 'img/chesspieces/staunty/{piece}.png',
     position: fen,
-    onDragStart,
-    onDrop,
-    onSnapEnd
+    orientation: orientationFromFEN(fen), // ← المنظور يتحدد من الـFEN
+    onDragStart: onDragStart,
+    onDrop: onDrop,
+    onSnapEnd: onSnapEnd
   };
 
   board = Chessboard('myBoard', config);
@@ -301,7 +307,8 @@ function handleMove(move){
   updateStatus();
 }
 
-function onSnapEnd(){ board.position(game.fen()); }
+function onSnapEnd(){ board.position(game.fen(), true);
+; }
 
 /* ====== Status ====== */
 function updateStatus(){
