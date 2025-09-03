@@ -116,7 +116,7 @@ function applyUploadedPuzzles(list){
     loadPuzzle(0);
   } else {
     try {
-      const res = await fetch('puzzles.json');   // ← الملف المحلي
+      const res = await fetch('puzzles.json?v=' + Date.now(), { cache: 'no-store' });   // ← الملف المحلي
       if (!res.ok) throw new Error('فشل تحميل puzzles.json');
       const list = await res.json();
       puzzles = list;
