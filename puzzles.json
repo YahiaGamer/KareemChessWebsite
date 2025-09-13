@@ -1,7 +1,4 @@
 [
-  {"id":1,"fen":"4rk2/5p1Q/q1p5/2P1p3/pPb5/P1p4R/5b2/2K5 w - - 4 38","lines":[["Qh6+","Ke7","Qd6#"]]},
-  {"id":2,"fen":"2r4r/1p3Q1p/p1k4b/4P3/5P2/2q3PP/P7/1K3B1R w - - 4 27","lines":[["Qe6+","Kc7","Qd6#"]]},
-  {"id":3,"fen":"3r1r2/4Bpk1/p3b3/7Q/7P/2p5/qPP2PP1/2K4R w - - 2 26","lines":[["Bf6+","Kxf6","Qg5#"]]},
-  {"id":4,"fen":"6k1/pp6/4N1p1/2pP4/1PP4p/2QKB3/1P4q1/7r b - - 1 31","lines":[["Qf1+","Kc2","Qd1#"]]},
-  {"id":5,"fen":"2r2Q2/2q1R1p1/2pk2p1/p2p3r/3b4/P6P/1PP2PP1/R5K1 w - - 5 25","lines":[["Re8+","Qe7","Qxe7#"]]}
+  {"id":1,"fen":"7k/8/1p6/8/8/8/8/3R3K w - - 0 1","lines":[["Rd6","Kh7","Rxb6"] , ["Rb6","Kh7","Rxb6"]]},
+  {"id":2,"fen":"2r4r/1p3Q1p/p1k4b/4P3/5P2/2q3PP/P7/1K3B1R w - - 4 27","lines":[["Qe6+","Kc7","Qd6#"]]}
 ]
