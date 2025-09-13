@@ -1,4 +1,4 @@
 [
-  {"id":1,"fen":"7k/8/1p6/8/8/8/8/3R3K w - - 0 1","lines":[["Rd6","Kh7","Rxb6"] , ["Rb6","Kh7","Rxb6"]]},
+  {"id":1,"fen":"7k/8/1p6/8/8/8/8/3R3K w - - 0 1","lines":[["Rd6","Kh7","Rxb6"] ,["Rb1","Kh7","Rxb6"]]},
   {"id":2,"fen":"2r4r/1p3Q1p/p1k4b/4P3/5P2/2q3PP/P7/1K3B1R w - - 4 27","lines":[["Qe6+","Kc7","Qd6#"]]}
 ]
