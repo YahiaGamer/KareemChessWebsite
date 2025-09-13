@@ -1,18 +1,7 @@
 [
-  {"id":1,"fen":"r2q1b1r/pppk2p1/4pn1p/3pnQ2/5NPP/5P2/PPP5/RNB1K2R w KQ - 0 14","solution":["Qxe6#"]},
-  {"id":2,"fen":"3R4/p3n1kp/1p2q1r1/8/5Q1K/5N2/P6P/8 w - - 10 41","solution":["Qf8#"]},
-  {"id":3,"fen":"1k6/1p2R1p1/pNp5/2P2p2/4pq2/1P6/PK2QP2/7r b - - 2 30","solution":["Qc1#"]},
-  {"id":4,"fen":"r4b1r/pp3kpp/4p3/3p1nq1/8/5P2/PPP1Q2P/RN2R2K w - - 0 22","solution":["Qxe6#"]},
-  {"id":5,"fen":"r1b5/1pk1r3/p5Q1/q2pn3/4N3/2P2P2/P1P3PP/R4RK1 w - - 7 26","solution":["Qd6#"]},
-  {"id":6,"fen":"rn1q1b1r/pp3kpp/2p1b3/8/8/1P4P1/P2PQP1P/R1B1R1K1 w - - 0 15","solution":["Qxe6#"]},
-  {"id":7,"fen":"1R6/2pp1kpp/5q2/2p5/8/3P1rP1/P1P4P/4Q1K1 w - - 0 26","solution":["Qe8#"]},
-  {"id":8,"fen":"6k1/5ppp/q2p4/8/1Q1P4/P3P1P1/1P1R2KP/2r5 b - - 1 27","solution":["Qf1#"]},
-  {"id":9,"fen":"r2q1b2/2p2kpp/p1n1b3/1p1n4/8/7P/PP2QPP1/RNB1R1K1 w - - 0 19","solution":["Qxe6#"]},
-  {"id":10,"fen":"8/p3q1pk/2p4p/3p4/2p2Q2/P1P2P2/1P1R1KPP/r7 b - - 0 33","solution":["Qe1#"]},
-  {"id":11,"fen":"6k1/1p1R1pp1/3p3p/2pP2B1/1qP5/1P1Q1P2/1P3KPP/r7 b - - 0 23","solution":["Qe1#"]},
-  {"id":12,"fen":"2R5/3r1kpp/1p1q1p2/1P6/8/4Q3/6PP/7K w - - 8 31","solution":["Qe8#"]},
-  {"id":13,"fen":"6k1/4qppp/2Q5/8/2P5/5P2/P2R1KPP/1r6 b - - 2 29","solution":["Qe1#"]},
-  {"id":14,"fen":"R7/1p1r2kp/2p1q1p1/2Q1p3/8/3p2P1/PP3PP1/6K1 w - - 0 35","solution":["Qf8#"]},
-  {"id":15,"fen":"5r2/3bk3/p1p1p1pB/q2p4/1b1P4/2N2Q2/PPP1KP2/r7 w - - 0 22","solution":["Qxf8#"]},
-  {"id":16,"fen":"2r4r/ppk3p1/3pb2p/1q2p3/7N/2P4P/PP1Q2P1/2KR3R w - - 0 23","solution":["Qxd6#"]}
+  {"id":1,"fen":"4rk2/5p1Q/q1p5/2P1p3/pPb5/P1p4R/5b2/2K5 w - - 4 38","lines":[["Qh6+","Ke7","Qd6#"]]},
+  {"id":2,"fen":"2r4r/1p3Q1p/p1k4b/4P3/5P2/2q3PP/P7/1K3B1R w - - 4 27","lines":[["Qe6+","Kc7","Qd6#"]]},
+  {"id":3,"fen":"3r1r2/4Bpk1/p3b3/7Q/7P/2p5/qPP2PP1/2K4R w - - 2 26","lines":[["Bf6+","Kxf6","Qg5#"]]},
+  {"id":4,"fen":"6k1/pp6/4N1p1/2pP4/1PP4p/2QKB3/1P4q1/7r b - - 1 31","lines":[["Qf1+","Kc2","Qd1#"]]},
+  {"id":5,"fen":"2r2Q2/2q1R1p1/2pk2p1/p2p3r/3b4/P6P/1PP2PP1/R5K1 w - - 5 25","lines":[["Re8+","Qe7","Qxe7#"]]}
 ]
